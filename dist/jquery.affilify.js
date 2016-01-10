@@ -1,6 +1,6 @@
 /*
  *  jquery-affilify - v0.0.1
- *  A library to replace hyperlinks within your app with affiliate links live on click 
+ *  A jquery plugin to replace links with affiliate links on the fly. Support for Amazon, Affilinet, Zanox.
  *  https://github.com/j7nn7k/affilifyt
  *
  *  Made by Jannik Weyrich
@@ -22,7 +22,7 @@
 		// minified (especially when both are regularly referenced in your plugin).
 
 		// Create the defaults once
-		var pluginName = "defaultPluginName",
+		var pluginName = "affilify",
 				defaults = {
 				propertyName: "value"
 		};
@@ -49,11 +49,9 @@
 						// and this.settings
 						// you can add more functions like the one below and
 						// call them like the example bellow
-						this.yourOtherFunction("jQuery Boilerplate");
 				},
-				yourOtherFunction: function (text) {
-						// some logic
-						$(this.element).text(text);
+				hello: function () {
+					return "hello";
 				}
 		});
 

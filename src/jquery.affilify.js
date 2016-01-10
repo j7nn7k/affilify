@@ -14,7 +14,7 @@
 		// minified (especially when both are regularly referenced in your plugin).
 
 		// Create the defaults once
-		var pluginName = "defaultPluginName",
+		var pluginName = "affilify",
 				defaults = {
 				propertyName: "value"
 		};
@@ -41,11 +41,9 @@
 						// and this.settings
 						// you can add more functions like the one below and
 						// call them like the example bellow
-						this.yourOtherFunction("jQuery Boilerplate");
 				},
-				yourOtherFunction: function (text) {
-						// some logic
-						$(this.element).text(text);
+				hello: function () {
+					return "hello";
 				}
 		});
 
