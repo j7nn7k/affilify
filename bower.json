@@ -1,0 +1,19 @@
+{
+	"name": "jquery-boilerplate",
+	"version": "4.0.0",
+	"homepage": "http://jqueryboilerplate.com",
+	"authors": [
+		"Jannik Weyrich <hjannikweyrich@gmail.com>"
+	],
+	"description": "A jquery plugin to replace links with affiliate links on the fly. Support for Amazon, Affilinet, Zanox.",
+	"main": "src/jquery.affilify.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"affiliate",
+		"zanox",
+		"affilinet",
+        "Amazon"
+	],
+	"license": "MIT"
+}
