@@ -31,13 +31,14 @@
 
 	QUnit.test("enable custom config", function ( assert ) {
 		$fixture.affilify({
+            zanoxPublisherId: "",
 			foo: "bar"
 		});
 
 		var pluginData = $fixture.data("plugin_affilify");
 
 		assert.deepEqual(pluginData.settings, {
-			propertyName: "value",
+            zanoxPublisherId: "",
 			foo: "bar"
 		}, "extend plugin settings");
 
