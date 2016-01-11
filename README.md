@@ -6,7 +6,25 @@ A jquery plugin to replace links with affiliate links on the fly. Support for Am
 
 ## How to use?
 
-TODO
+1. Include jQuery:
+
+	```html
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	```
+
+2. Include plugin's code:
+
+	```html
+	<script src="dist/jquery.affilify.min.js"></script>
+	```
+
+3. Call the plugin with your zanox publisher id:
+
+	```javascript
+	$("a").affilify({
+	    zanoxPublisherId: "36434335C584445997"
+	});
+	```
 
 ## Getting started with development
 
