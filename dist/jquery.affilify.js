@@ -24,7 +24,8 @@
     // Create the defaults once
     var pluginName = "affilify",
         defaults = {
-            zanoxPublisherId: ""
+            zanoxPublisherId: "",
+            amazonPublisherId: ""
         };
 
     // The actual plugin constructor
@@ -33,7 +34,7 @@
         this.$el = $(element);
         this.originalUrl = this.$el.attr("href") || "";
         this.originalDomain = this.extractDomain(this.originalUrl);
-        this.affiliateUrl = "";
+        this.affiliateUrl = this.originalUrl;
         // jQuery has an extend method which merges the contents of two or
         // more objects, storing the result in the first object. The first object
         // is generally empty as we don't want to alter the default options for
@@ -47,11 +48,15 @@
     // Avoid Plugin.prototype conflicts
     $.extend(Plugin.prototype, {
         init: function () {
+            var self = this;
             this.$el.click(function (e) {
-                if (this.shouldReplaceLink()) {
+                if (self.shouldReplaceLink()) {
                     e.preventDefault();
-                    if (this.isZanox()) {
-                        this.makeZanox();
+                    if (self.isZanox()) {
+                        self.makeZanox();
+                    }
+                    if (self.isAmazon()) {
+                        self.makeAmazon();
                     }
                 }
             });
@@ -79,8 +84,25 @@
         },
         isZanox: function () {
             return this.originalDomain.indexOf("myprotein") > -1 || this.originalDomain.indexOf("vaola.de") > -1;
-        }
+        },
+        isAmazon: function () {
+            return this.originalDomain.indexOf("amazon") > -1;
+        },
+        makeAmazon: function () {
 
+            if (this.originalUrl.indexOf("?tag=") > -1 || this.originalUrl.indexOf("&tag=") > -1) {
+                this.affiliateUrl = this.replaceQueryParam(this.originalUrl, "tag", this.settings.amazonPublisherId);
+            } else {
+                this.affiliateUrl = this.originalUrl + "&tag=" + this.settings.amazonPublisherId;
+            }
+        },
+        replaceQueryParam: function(url, paramName, paramValue) {
+            var pattern = new RegExp("\\b("+paramName+"=).*?(&|$)");
+            if(url.search(pattern)>=0){
+                return url.replace(pattern,"$1" + paramValue + "$2");
+            }
+            return url + (url.indexOf("?")>0 ? "&" : "?") + paramName + "=" + paramValue;
+        }
     });
 
     // A really lightweight plugin wrapper around the constructor,
