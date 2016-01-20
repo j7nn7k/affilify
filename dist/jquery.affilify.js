@@ -58,6 +58,7 @@
                     if (self.isAmazon()) {
                         self.makeAmazon();
                     }
+                    window.location.href = self.affiliateUrl;
                 }
             });
         },

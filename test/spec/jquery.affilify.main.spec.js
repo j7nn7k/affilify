@@ -216,4 +216,18 @@
         assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
     });
 
+    QUnit.test("should not make zanox link for existing affiliate link", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
+    });
+
 }(jQuery, QUnit));
