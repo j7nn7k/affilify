@@ -33,7 +33,10 @@
 		$fixture.affilify({
             zanoxPublisherId: "",
             amazonPublisherId: "",
-			foo: "bar"
+			affilinet: {
+                publisherId: "",
+                programs: [{ programId: "", domain: ""}]
+            }
 		});
 
 		var pluginData = $fixture.data("plugin_affilify");
@@ -41,7 +44,10 @@
 		assert.deepEqual(pluginData.settings, {
             zanoxPublisherId: "",
             amazonPublisherId: "",
-			foo: "bar"
+			affilinet: {
+                publisherId: "",
+                programs: [{ programId: "", domain: ""}]
+            }
 		}, "extend plugin settings");
 
 	});
