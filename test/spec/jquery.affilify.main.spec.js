@@ -253,20 +253,6 @@
         assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
     });
 
-    QUnit.test("should not make zanox link for existing affiliate link", function (assert) {
-        expect(1);
-
-        var fixture = $("<a href='https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]'>test</a>");
-
-        $testCanvas.append(fixture);
-
-        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
-        fixture.trigger("click");
-        var instance = fixture.data("plugin_affilify");
-
-        assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
-    });
-
     /*
     * Affilinet
     *
@@ -281,7 +267,7 @@
             fixture.affilify({
                 affilinet: {
                     publisherId: "",
-                    programs: { programId: "123", domain: "vitafy.de", siteId: "123"}
+                    programs: { domain: "vitafy.de", siteId: "123"}
                 }
             });
         }, Error, "Must throw error to pass.");
@@ -296,7 +282,7 @@
         fixture.affilify({
 			affilinet: {
                 publisherId: "",
-                programs: [{ programId: "123", domain: "vitafy.de", siteId: "123"}]
+                programs: [{domain: "vitafy.de", siteId: "123"}]
             }
 		});
         var instance = fixture.data("plugin_affilify");
@@ -312,7 +298,7 @@
         fixture.affilify({
 			affilinet: {
                 publisherId: "",
-                programs: [{ programId: "123", domain: "vitafy.de", siteId: "123"}]
+                programs: [{domain: "vitafy.de", siteId: "123"}]
             }
 		});
         var instance = fixture.data("plugin_affilify");
@@ -327,7 +313,7 @@
 
         fixture.affilify({
 			affilinet: {
-                publisherId: "",
+                publisherId: "756180",
                 programs: [{ programId: "123", domain: "vitafy.de", siteId: "123"}]
             }
 		});
@@ -345,8 +331,8 @@
 
         fixture.affilify({
 			affilinet: {
-                publisherId: "",
-                programs: [{ programId: "756180", domain: "fitmart.de", siteId: "12802"}]
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}]
             } });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
@@ -355,8 +341,7 @@
     });
 
     //TODO test more config failures
-
-    //http://partners.webmasterplan.com/click.asp?ref=xxxxxx&site=2464&type=text&tnb=25&diurl=###DestinationURL###
-    //http://partners.webmasterplan.com/click.asp?ref= this.affilinetPublisherId &site= this.affilinetSite &type=text&tnb=1&diurl= this.cleanUrl
+    //TODO check if all services are configured. if not do not run the replacement scripts
+    //TODO check for more exotic combinations (all services configured. Only some configured etc...
 
 }(jQuery, QUnit));

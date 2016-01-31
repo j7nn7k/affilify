@@ -18,11 +18,19 @@ A jquery plugin to replace links with affiliate links on the fly. Support for Za
 	<script src="dist/jquery.affilify.min.js"></script>
 	```
 
-3. Call the plugin with your zanox publisher id:
+3. Call the plugin with your affiliate networks publisher settings:
 
 	```javascript
 	$("a").affilify({
-	    zanoxPublisherId: "36434335C584445997"
+	    zanoxPublisherId: "YOUR_ZANOX_PUB_ID",
+	    amazonPublisherId: "YOUR_AMAZON_PUB_ID",
+        affilinet: {
+            publisherId: "YOUR_AFFILINET_PUB_ID",
+            programs: [
+                { domain: "fitmart.de", siteId: "12802"}, 
+                { domain: "sportscheck.com", siteId: "3617"}
+            ]
+        } 
 	});
 	```
 
@@ -72,6 +80,15 @@ Before sending a pull request remember to follow [jQuery Core Style Guide](http:
     ```
     ./node_modules/karma/bin/karma start
     ```
+
+##TODO
+
+* Improve performance: E.g. don't do unnecessary checks
+* Test more config failures
+* Test if all services are configured. if not do not run the replacement scripts
+* Test more exotic config combinations (all services configured. Only some configured etc...)
+* Include travis and all that fancy CI stuff (test coverage, build status, etc)
+* Publish plugin on package managers (e.g. bower)
 
 ## License
 

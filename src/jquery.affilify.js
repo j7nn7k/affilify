@@ -18,9 +18,9 @@
         defaults = {
             zanoxPublisherId: "",
             amazonPublisherId: "",
-			affilinet: {
+            affilinet: {
                 publisherId: "",
-                programs: [{ programId: "", domain: "", siteId: ""}]
+                programs: [{domain: "", siteId: ""}]
             }
         };
 
@@ -38,7 +38,7 @@
         this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
-        if (this.areSettingsValid()){
+        if (this.areSettingsValid()) {
             this.init();
         }
     }
@@ -50,13 +50,11 @@
             this.$el.click(function (e) {
                 if (self.shouldReplaceLink()) {
                     e.preventDefault();
-                    if (self.isZanox()) {
-                        self.makeZanox();
-                    }
                     if (self.isAmazon()) {
                         self.makeAmazon();
-                    }
-                    if (self.isAffilinet()) {
+                    } else if (self.isZanox()) {
+                        self.makeZanox();
+                    } else if (self.isAffilinet()) {
                         self.makeAffilinet();
                     }
                     window.location.href = self.affiliateUrl;
@@ -85,16 +83,22 @@
             this.affiliateUrl = "https://ad.zanox.com/ppc/?" + this.settings.zanoxPublisherId + "&ulp=[[" + this.originalUrl + "?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]";
         },
         isZanox: function () {
+            //if not configured return
             return this.originalDomain.indexOf("myprotein") > -1 || this.originalDomain.indexOf("vaola.de") > -1;
         },
         isAmazon: function () {
+            //if not configured return
             return this.originalDomain.indexOf("amazon") > -1;
         },
         isAffilinet: function () {
+            //if not configured return
             var self = this;
             var isAffilinetPartner = false;
-            this.settings.affilinet.programs.forEach(function(program){
-                if (self.originalDomain.indexOf(program.domain) > -1){
+            this.settings.affilinet.programs.forEach(function (program) {
+                if (!program.domain) {
+                    return;
+                }
+                if (self.originalDomain.indexOf(program.domain) > -1) {
                     isAffilinetPartner = true;
                     return;
                 }
@@ -103,9 +107,9 @@
         },
         makeAffilinet: function () {
             var self = this;
-            this.settings.affilinet.programs.forEach(function(program){
-                if (self.originalDomain.indexOf(program.domain) > -1){
-                    self.affiliateUrl = "http://partners.webmasterplan.com/click.asp?ref=" + self.settings.affilinet.publisherId + "&site=" + program.site + "&type=text&tnb=1&diurl=" + self.originalUrl;
+            this.settings.affilinet.programs.forEach(function (program) {
+                if (self.originalDomain.indexOf(program.domain) > -1) {
+                    self.affiliateUrl = "http://partners.webmasterplan.com/click.asp?ref=" + self.settings.affilinet.publisherId + "&site=" + program.siteId + "&type=text&tnb=1&diurl=" + encodeURIComponent(self.originalUrl);
                 }
             });
         },
@@ -117,15 +121,15 @@
                 this.affiliateUrl = this.originalUrl + "&tag=" + this.settings.amazonPublisherId;
             }
         },
-        replaceQueryParam: function(url, paramName, paramValue) {
-            var pattern = new RegExp("\\b("+paramName+"=).*?(&|$)");
-            if(url.search(pattern)>=0){
-                return url.replace(pattern,"$1" + paramValue + "$2");
+        replaceQueryParam: function (url, paramName, paramValue) {
+            var pattern = new RegExp("\\b(" + paramName + "=).*?(&|$)");
+            if (url.search(pattern) >= 0) {
+                return url.replace(pattern, "$1" + paramValue + "$2");
             }
-            return url + (url.indexOf("?")>0 ? "&" : "?") + paramName + "=" + paramValue;
+            return url + (url.indexOf("?") > 0 ? "&" : "?") + paramName + "=" + paramValue;
         },
-        areSettingsValid: function(){
-            if (this.settings.affilinet && this.settings.affilinet.programs){
+        areSettingsValid: function () {
+            if (this.settings.affilinet && this.settings.affilinet.programs) {
                 if (this.settings.affilinet.programs.constructor !== Array) {
                     throw new Error("The affilinet *programs* property should be an array or left out altogether.");
                 }
