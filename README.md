@@ -2,7 +2,7 @@
 
 ## What it does
 
-A jquery plugin to replace links with affiliate links on the fly. Support for Zanox, Amazon (TODO), Affilinet (TODO).
+A jquery plugin to replace links with affiliate links on the fly. Support for Zanox, Amazon and Affilinet.
 
 ## How to use?
 
