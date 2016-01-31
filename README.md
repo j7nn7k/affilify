@@ -88,7 +88,6 @@ Before sending a pull request remember to follow [jQuery Core Style Guide](http:
 * Improve performance: E.g. don't do unnecessary checks
 * Test more config failures
 * Test if all services are configured. if not do not run the replacement scripts
-* Test more exotic config combinations (all services configured. Only some configured etc...)
 * Include travis and all that fancy CI stuff (test coverage, build status, etc)
 * Publish plugin on package managers (e.g. bower)
 

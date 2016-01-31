@@ -137,7 +137,7 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
+        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.affiliateUrl, "http://de.test.com/home.dept");
@@ -190,7 +190,7 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
+        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -204,7 +204,14 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997", amazonPublisherId: "36434335C584445997" });
+        fixture.affilify({
+            zanoxPublisherId: "36434335C584445997",
+            amazonPublisherId: "36434335C584445997",
+            affilinet: {
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -218,7 +225,7 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997", amazonPublisherId: "999" });
+        fixture.affilify({zanoxPublisherId: "36434335C584445997", amazonPublisherId: "999"});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -232,7 +239,7 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
+        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -246,7 +253,13 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997" });
+        fixture.affilify({
+            zanoxPublisherId: "36434335C584445997",
+            affilinet: {
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -254,9 +267,9 @@
     });
 
     /*
-    * Affilinet
-    *
-    */
+     * Affilinet
+     *
+     */
 
     QUnit.test("should not vaildate affilinet config", function (assert) {
         expect(1);
@@ -267,7 +280,7 @@
             fixture.affilify({
                 affilinet: {
                     publisherId: "",
-                    programs: { domain: "vitafy.de", siteId: "123"}
+                    programs: {domain: "vitafy.de", siteId: "123"}
                 }
             });
         }, Error, "Must throw error to pass.");
@@ -280,11 +293,11 @@
         var fixture = $("<a href='http://vitafy.de/'>test</a>");
 
         fixture.affilify({
-			affilinet: {
+            affilinet: {
                 publisherId: "",
                 programs: [{domain: "vitafy.de", siteId: "123"}]
             }
-		});
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.areSettingsValid(), true);
@@ -296,11 +309,11 @@
         var fixture = $("<a href='http://vitafy.de/'>test</a>");
 
         fixture.affilify({
-			affilinet: {
+            affilinet: {
                 publisherId: "",
                 programs: [{domain: "vitafy.de", siteId: "123"}]
             }
-		});
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isAffilinet(), true);
@@ -312,11 +325,11 @@
         var fixture = $("<a href='http://partners.webmasterplan.com/click.asp?ref=756180&site=12802&type=text&tnb=26&diurl=http%3A%2F%2Fvitafy.de%2FProtein%2FESN-Designer-Whey-1000g-Standbeutel.html'>test</a>");
 
         fixture.affilify({
-			affilinet: {
+            affilinet: {
                 publisherId: "756180",
-                programs: [{ programId: "123", domain: "vitafy.de", siteId: "123"}]
+                programs: [{programId: "123", domain: "vitafy.de", siteId: "123"}]
             }
-		});
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isAffilinet(), false);
@@ -330,10 +343,32 @@
         $testCanvas.append(fixture);
 
         fixture.affilify({
-			affilinet: {
+            affilinet: {
                 publisherId: "756180",
                 programs: [{domain: "fitmart.de", siteId: "12802"}]
-            } });
+            }
+        });
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "http://partners.webmasterplan.com/click.asp?ref=756180&site=12802&type=text&tnb=1&diurl=http%3A%2F%2Fwww.fitmart.de%2FProtein%2FESN-Designer-Whey-1000g-Standbeutel.html");
+    });
+
+    QUnit.test("should make affilinet link", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://www.fitmart.de/Protein/ESN-Designer-Whey-1000g-Standbeutel.html'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({
+            zanoxPublisherId: "36434335C584445997",
+            amazonPublisherId: "999",
+            affilinet: {
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -342,6 +377,5 @@
 
     //TODO test more config failures
     //TODO check if all services are configured. if not do not run the replacement scripts
-    //TODO check for more exotic combinations (all services configured. Only some configured etc...
 
 }(jQuery, QUnit));
