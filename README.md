@@ -27,8 +27,10 @@ A jquery plugin to replace links with affiliate links on the fly. Support for Za
         affilinet: {
             publisherId: "YOUR_AFFILINET_PUB_ID",
             programs: [
-                { domain: "fitmart.de", siteId: "12802"}, 
+            	// add your affilinet programs here
+                { domain: "fitmart.de", siteId: "12802"},  
                 { domain: "sportscheck.com", siteId: "3617"}
+                // ... and so on ...
             ]
         } 
 	});
