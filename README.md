@@ -4,6 +4,12 @@
 
 A jquery plugin to replace links with affiliate links on the fly. Support for Zanox, Amazon and Affilinet.
 
+
+## Demo
+
+Find some sample use cases here: http://jannikweyrich.com/affilify/
+
+
 ## How to use?
 
 1. Include jQuery:
