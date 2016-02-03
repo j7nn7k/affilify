@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>jQuery Affilify Demo</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <style>
+        /* Space out content a bit */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* Everything but the jumbotron gets side spacing for mobile first views */
+        .header,
+        .footer {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        /* Custom page header */
+        .header {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Make the masthead heading the same height as the navigation */
+        .header h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 40px;
+        }
+
+        /* Custom page footer */
+        .footer {
+            padding-top: 19px;
+            color: #777;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        /* Customize container */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 730px;
+            }
+        }
+
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
+
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .jumbotron .btn {
+            padding: 14px 24px;
+            font-size: 21px;
+        }
+
+        /* Responsive: Portrait tablets and up */
+        @media screen and (min-width: 768px) {
+            /* Remove the padding we set earlier */
+            .header,
+            .footer {
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            /* Space out the masthead */
+            .header {
+                margin-bottom: 30px;
+            }
+        }
+
+    </style>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../dist/jquery.affilify.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="https://github.com/j7nn7k/affilify"><i class="glyph glyph-github"></i> Affilify on Github</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">jQuery Affilify Demo</h3>
+    </div>
+
+
+    <h1>Demo Links</h1>
+
+    <p>
+        Affilify will transform product links to affiliate links automatically.
+        Open the browser's web tools and check the network tab for the redirect when you click on the links.
+        This is a sample configuration:
+    </p>
+
+    <p>
+        <pre>
+            // init affilify plugin
+            $("a").affilify({
+                zanoxPublisherId: "36434335C584445997",
+                amazonPublisherId: "f07e5-21",
+                affilinet: {
+                    publisherId: "756180",
+                    programs: [
+                        // affilinet programs
+                        {domain: "decathlon.de", siteId: "10685"},
+                        {domain: "fitmart.de", siteId: "12802"},
+                        {domain: "sportscheck.com", siteId: "3617"}
+                    ]
+                }
+            });
+
+        </pre>
+    </p>
+
+    <h3>Zanox</h3>
+    <p><a href="http://de.myprotein.com/home.dept">http://de.myprotein.com/home.dept</a></p>
+
+    <h3>Amazon</h3>
+    <p><a href="http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery">http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery</a></p>
+
+    <h3>Affilinet</h3>
+    <p><a href="http://www.fitmart.de/Protein/ESN-Designer-Whey-1000g-Standbeutel.html">http://www.fitmart.de/Protein/ESN-Designer-Whey-1000g-Standbeutel.html</a></p>
+    <p><a href="http://www.decathlon.de/gps-uhr-vivoactive-id_8347171.html">http://www.decathlon.de/gps-uhr-vivoactive-id_8347171.html</a></p>
+    <p><a href="http://www.sportscheck.com/blackroll-standard-faszienrolle-p228437-F041/schwarzblauorange/">http://www.sportscheck.com/blackroll-standard-faszienrolle-p228437-F041/schwarzblauorange/</a></p>
+
+
+    <footer class="footer">
+        <p><a href="https://github.com/j7nn7k/affilify"><i class="glyph glyph-github"></i> Affilify on Github</a></p>
+    </footer>
+
+
+</div>
+
+
+<script>
+    $(function () {
+        // init affilify plugin
+        $("a").affilify({
+            zanoxPublisherId: "36434335C584445997",
+            amazonPublisherId: "f07e5-21",
+            affilinet: {
+                publisherId: "756180",
+                programs: [
+                    // affilinet programs
+                    {domain: "decathlon.de", siteId: "10685"},
+                    {domain: "vitafy.de", siteId: "10799"},
+                    {domain: "fitmart.de", siteId: "12802"},
+                    {domain: "nu3.de", siteId: "9846"},
+                    {domain: "planet-sports.de", siteId: "1943"},
+                    {domain: "engelhorn.de", siteId: "10319"},
+                    {domain: "engelhorn.de", siteId: "10319"},
+                    {domain: "intersport.de", siteId: "12353"},
+                    {domain: "sportbedarf.de", siteId: "1717"},
+                    {domain: "sportscheck.com", siteId: "3617"}
+                ]
+            }
+        });
+    });
+</script>
+</body>
+</html>
