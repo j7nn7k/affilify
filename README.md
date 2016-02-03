@@ -1,5 +1,7 @@
 # jQuery Affilify
 
+[![Build Status](https://travis-ci.org/j7nn7k/affilify.svg?branch=master)](https://travis-ci.org/j7nn7k/affilify)
+
 ## What it does
 
 A jquery plugin to replace links with affiliate links on the fly. Support for Zanox, Amazon and Affilinet.
