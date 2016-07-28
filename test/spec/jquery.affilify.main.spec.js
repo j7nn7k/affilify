@@ -291,6 +291,23 @@
         assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
     });
 
+    QUnit.test("should make zanox link with multiple programs configured", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://de.myprotein.com/home.dept'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "myprotein.com"}, {domain: "bulkpowders.de"}]
+            }});
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
+    });
+
     QUnit.test("should not make zanox link for existing affiliate link", function (assert) {
         expect(1);
 
