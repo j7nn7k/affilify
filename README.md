@@ -35,7 +35,10 @@ want to use.
 
 	```javascript
 	$("a").affilify({
-	    zanoxPublisherId: "YOUR_ZANOX_PUB_ID",
+	    zanox: {
+                publisherId: "YOUR_ZANOX_PUB_ID",
+                programs: [{ domain: "myprotein.com", domain: "vaola.de" }]
+            },
 	    amazonPublisherId: "YOUR_AMAZON_PUB_ID",
         affilinet: {
             publisherId: "YOUR_AFFILINET_PUB_ID",
@@ -48,6 +51,16 @@ want to use.
         } 
 	});
 	```
+	
+## Changelog
+
+### 2.0.0
+
+* ( **Breaking change** ) Add support for multiple Zanox partners
+
+### 1.0.0
+
+Initial release
 
 ## Contributing
 
@@ -101,7 +114,7 @@ Before sending a pull request remember to follow [jQuery Core Style Guide](http:
 * Improve performance: E.g. don't do unnecessary checks
 * Test more config failures
 * Test if all services are configured. if not do not run the replacement scripts
-* Include travis and all that fancy CI stuff (test coverage, build status, etc)
+* Include travis and all that fancy CI stuff (test coverage, etc)
 * Publish plugin on package managers (e.g. bower)
 
 

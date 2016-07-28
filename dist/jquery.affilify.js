@@ -24,13 +24,16 @@
     // Create the defaults once
     var pluginName = "affilify",
         defaults = {
-            zanoxPublisherId: "",
-            amazonPublisherId: "",
-            affilinet: {
+			zanox: {
                 publisherId: "",
-                programs: [{domain: "", siteId: ""}]
+                programs: [{ domain: ""}]
+            },
+            amazonPublisherId: "",
+			affilinet: {
+                publisherId: "",
+                programs: [{ siteId: "", domain: ""}]
             }
-        };
+		};
 
     // The actual plugin constructor
     function Plugin(element, options) {
@@ -88,11 +91,22 @@
             return protocol + domain;
         },
         makeZanox: function () {
-            this.affiliateUrl = "https://ad.zanox.com/ppc/?" + this.settings.zanoxPublisherId + "&ulp=[[" + this.originalUrl + "?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]";
+            this.affiliateUrl = "https://ad.zanox.com/ppc/?" + this.settings.zanox.publisherId + "&ulp=[[" + this.originalUrl + "?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]";
         },
         isZanox: function () {
             //if not configured return
-            return this.originalDomain.indexOf("myprotein") > -1 || this.originalDomain.indexOf("vaola.de") > -1;
+            var self = this;
+            var isZanoxPartner = false;
+            this.settings.zanox.programs.forEach(function (program) {
+                if (!program.domain) {
+                    return;
+                }
+                if (self.originalDomain.indexOf(program.domain) > -1) {
+                    isZanoxPartner = true;
+                    return;
+                }
+            });
+            return isZanoxPartner;
         },
         isAmazon: function () {
             //if not configured return
