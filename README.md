@@ -37,7 +37,7 @@ want to use.
 	$("a").affilify({
 	    zanox: {
                 publisherId: "YOUR_ZANOX_PUB_ID",
-                programs: [{ domain: "myprotein.com", domain: "vaola.de" }]
+                programs: [{ domain: "myprotein.com"}, { domain: "vaola.de" }]
             },
 	    amazonPublisherId: "YOUR_AMAZON_PUB_ID",
         affilinet: {
@@ -56,6 +56,10 @@ want to use.
 
 ### 2.0.0
 
+#### 2.1.0
+* Fix mistake in demo and docs
+
+#### 2.0.0
 * ( **Breaking change** ) Add support for multiple Zanox partners
 
 ### 1.0.0
