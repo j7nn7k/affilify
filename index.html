@@ -116,7 +116,10 @@
         <pre>
             // init affilify plugin
             $("a").affilify({
-                zanoxPublisherId: "36434335C584445997",
+                zanox: {
+                        publisherId: "36434335C584445997",
+                        programs: [{ domain: "myprotein.com", domain: "vaola.de" }]
+                    },
                 amazonPublisherId: "f07e5-21",
                 affilinet: {
                     publisherId: "756180",
@@ -136,6 +139,7 @@
 
     <h3>Zanox</h3>
     <p><a href="http://de.myprotein.com/home.dept">http://de.myprotein.com/home.dept</a></p>
+    <p><a href="http://www.vaola.de/p/reebok-classic-leather-sneaker-herren-schwarz.html">http://www.vaola.de/p/reebok-classic-leather-sneaker-herren-schwarz.html</a></p>
 
     <h3>Amazon</h3>
     <p><a href="http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery">http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery</a></p>
@@ -162,7 +166,10 @@
     $(function () {
         // init affilify plugin
         $("a").affilify({
-            zanoxPublisherId: "36434335C584445997",
+            zanox: {
+                    publisherId: "36434335C584445997",
+                    programs: [{ domain: "myprotein.com", domain: "vaola.de", domain: "bulkpowders.de" }]
+                },
             amazonPublisherId: "f07e5-21",
             affilinet: {
                 publisherId: "756180",

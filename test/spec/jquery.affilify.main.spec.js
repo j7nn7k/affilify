@@ -85,22 +85,46 @@
     QUnit.test("should validate zanox link for myprotein", function (assert) {
         expect(1);
 
-        var fixture = $("<a href='http://myprotein.com/'>test</a>");
+        var fixture = $("<a href='http://myprotein.com/stuff'>test</a>");
         $testCanvas.append(fixture);
-
-        fixture.affilify();
+        fixture.affilify({
+            zanox: {
+                publisherId: "",
+                programs: [{domain: "myprotein.com"}]
+            }
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isZanox(), true);
     });
 
-    QUnit.test("should validate zanox link for www.myprotein.com", function (assert) {
+    QUnit.test("should validate zanox link for www.myprotein", function (assert) {
         expect(1);
 
-        var fixture = $("<a href='http://www.myprotein.com/'>test</a>");
+        var fixture = $("<a href='http://www.myprotein.com/stuff'>test</a>");
         $testCanvas.append(fixture);
+        fixture.affilify({
+            zanox: {
+                publisherId: "",
+                programs: [{domain: "myprotein.com"}]
+            }
+        });
+        var instance = fixture.data("plugin_affilify");
 
-        fixture.affilify();
+        assert.equal(instance.isZanox(), true);
+    });
+
+    QUnit.test("should validate zanox link for myprotein", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://myprotein.com/stuff'>test</a>");
+        $testCanvas.append(fixture);
+        fixture.affilify({
+            zanox: {
+                publisherId: "",
+                programs: [{domain: "myprotein.com"}]
+            }
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isZanox(), true);
@@ -111,8 +135,12 @@
 
         var fixture = $("<a href='http://www.vaola.de/s/?f=3&kindergroesse=74&preis=36-40&q=nike'>test</a>");
         $testCanvas.append(fixture);
-
-        fixture.affilify();
+        fixture.affilify({
+            zanox: {
+                publisherId: "",
+                programs: [{domain: "www.vaola.de"}]
+            }
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isZanox(), true);
@@ -123,8 +151,12 @@
 
         var fixture = $("<a href='http://vaola.de/s/?f=3&kindergroesse=74&preis=36-40&q=nike'>test</a>");
         $testCanvas.append(fixture);
-
-        fixture.affilify();
+        fixture.affilify({
+            zanox: {
+                publisherId: "",
+                programs: [{domain: "vaola.de"}]
+            }
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.isZanox(), true);
@@ -137,7 +169,11 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            }
+        });
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.affiliateUrl, "http://de.test.com/home.dept");
@@ -190,7 +226,10 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            }});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -205,8 +244,11 @@
         $testCanvas.append(fixture);
 
         fixture.affilify({
-            zanoxPublisherId: "36434335C584445997",
             amazonPublisherId: "36434335C584445997",
+            zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            },
             affilinet: {
                 publisherId: "756180",
                 programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
@@ -225,7 +267,7 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997", amazonPublisherId: "999"});
+        fixture.affilify({amazonPublisherId: "999"});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -239,7 +281,10 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanoxPublisherId: "36434335C584445997"});
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "myprotein.com"}]
+            }});
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -253,8 +298,10 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({
-            zanoxPublisherId: "36434335C584445997",
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            },
             affilinet: {
                 publisherId: "756180",
                 programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
@@ -327,7 +374,7 @@
         fixture.affilify({
             affilinet: {
                 publisherId: "756180",
-                programs: [{programId: "123", domain: "vitafy.de", siteId: "123"}]
+                programs: [{siteId: "123", domain: "vitafy.de"}]
             }
         });
         var instance = fixture.data("plugin_affilify");
@@ -361,8 +408,10 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({
-            zanoxPublisherId: "36434335C584445997",
+        fixture.affilify({zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            },
             amazonPublisherId: "999",
             affilinet: {
                 publisherId: "756180",

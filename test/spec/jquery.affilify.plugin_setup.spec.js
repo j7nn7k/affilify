@@ -31,22 +31,28 @@
 
 	QUnit.test("enable custom config", function ( assert ) {
 		$fixture.affilify({
-            zanoxPublisherId: "",
+			zanox: {
+                publisherId: "",
+                programs: [{ domain: ""}]
+            },
             amazonPublisherId: "",
 			affilinet: {
                 publisherId: "",
-                programs: [{ programId: "", domain: ""}]
+                programs: [{ siteId: "", domain: ""}]
             }
 		});
 
 		var pluginData = $fixture.data("plugin_affilify");
 
 		assert.deepEqual(pluginData.settings, {
-            zanoxPublisherId: "",
+			zanox: {
+                publisherId: "",
+                programs: [{ domain: ""}]
+            },
             amazonPublisherId: "",
 			affilinet: {
                 publisherId: "",
-                programs: [{ programId: "", domain: ""}]
+                programs: [{ siteId: "", domain: ""}]
             }
 		}, "extend plugin settings");
 

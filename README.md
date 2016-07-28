@@ -1,28 +1,44 @@
 # jQuery Affilify
 
+[![Build Status](https://travis-ci.org/j7nn7k/affilify.svg?branch=master)](https://travis-ci.org/j7nn7k/affilify)
+
 ## What it does
 
 A jquery plugin to replace links with affiliate links on the fly. Support for Zanox, Amazon and Affilinet.
 
+
+## Demo
+
+Find some sample use cases here: http://jannikweyrich.com/affilify/
+
+
 ## How to use?
 
-1. Include jQuery:
+1. Open affiliate accounts at those services where you want to place product links to. Affilifiy currently works 
+for <a href="http://www.zanox.com/" target="_blank">Zanox</a>, <a href="http://www.amazon.de/" target="_blank">Amazon</a> 
+and <a href="http://www.affili.net/" target="_blank">Affilinet</a>. You can use all of them or choose which ones you
+want to use.
+
+2. Include jQuery:
 
 	```html
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	```
 
-2. Include plugin's code:
+3. Include the Affilify plugin's code to your page:
 
 	```html
 	<script src="dist/jquery.affilify.min.js"></script>
 	```
 
-3. Call the plugin with your affiliate networks publisher settings:
+4. Call the plugin with your affiliate network's publisher settings. Whichever you want to use:
 
 	```javascript
 	$("a").affilify({
-	    zanoxPublisherId: "YOUR_ZANOX_PUB_ID",
+	    zanox: {
+                publisherId: "YOUR_ZANOX_PUB_ID",
+                programs: [{ domain: "myprotein.com", domain: "vaola.de" }]
+            },
 	    amazonPublisherId: "YOUR_AMAZON_PUB_ID",
         affilinet: {
             publisherId: "YOUR_AFFILINET_PUB_ID",
@@ -35,6 +51,16 @@ A jquery plugin to replace links with affiliate links on the fly. Support for Za
         } 
 	});
 	```
+	
+## Changelog
+
+### 2.0.0
+
+* ( **Breaking change** ) Add support for multiple Zanox partners
+
+### 1.0.0
+
+Initial release
 
 ## Contributing
 
@@ -88,8 +114,13 @@ Before sending a pull request remember to follow [jQuery Core Style Guide](http:
 * Improve performance: E.g. don't do unnecessary checks
 * Test more config failures
 * Test if all services are configured. if not do not run the replacement scripts
-* Include travis and all that fancy CI stuff (test coverage, build status, etc)
+* Include travis and all that fancy CI stuff (test coverage, etc)
 * Publish plugin on package managers (e.g. bower)
+
+
+## Questions
+
+Ping me on Twitter [@jnk_wyrch](http://twitter.com/jnk_wyrch).
 
 ## License
 
