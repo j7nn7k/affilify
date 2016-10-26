@@ -1,6 +1,6 @@
 {
   "name": "jquery-affilify",
-  "version": "0.0.1",
+  "version": "2.1.1",
   "description": "A jquery plugin to replace links with affiliate links on the fly. Support for Amazon, Affilinet, Zanox.",
   "keywords": [
     "jquery-plugin",

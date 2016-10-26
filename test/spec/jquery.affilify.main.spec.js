@@ -169,7 +169,8 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "vaola.de"}]
             }
@@ -226,10 +227,12 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "vaola.de"}]
-            }});
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -260,6 +263,30 @@
         assert.equal(instance.affiliateUrl, "http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery&tag=36434335C584445997");
     });
 
+    QUnit.test("should make amazon link with #-sign", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery#test'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({
+            amazonPublisherId: "36434335C584445997",
+            zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            },
+            affilinet: {
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
+            }
+        });
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "http://www.amazon.de/jQuery-kurz-gut-Andreas-Vdovkin/dp/3897215772/ref=sr_1_6?ie=UTF8&qid=1452556958&sr=8-6&keywords=jquery&tag=36434335C584445997%23test");
+    });
+
     QUnit.test("should update amazon link", function (assert) {
         expect(1);
 
@@ -281,10 +308,12 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "myprotein.com"}]
-            }});
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
@@ -298,14 +327,35 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "myprotein.com"}, {domain: "bulkpowders.de"}]
-            }});
+            }
+        });
         fixture.trigger("click");
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
+    });
+
+    QUnit.test("should make zanox link with #-sign in the url", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://de.myprotein.com/home.dept#test'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({
+            zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "myprotein.com"}, {domain: "bulkpowders.de"}]
+            }
+        });
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "https://ad.zanox.com/ppc/?36434335C584445997&ulp=[[http://de.myprotein.com/home.dept%23test?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]");
     });
 
     QUnit.test("should not make zanox link for existing affiliate link", function (assert) {
@@ -315,7 +365,8 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "vaola.de"}]
             },
@@ -425,7 +476,8 @@
 
         $testCanvas.append(fixture);
 
-        fixture.affilify({zanox: {
+        fixture.affilify({
+            zanox: {
                 publisherId: "36434335C584445997",
                 programs: [{domain: "vaola.de"}]
             },
@@ -439,6 +491,30 @@
         var instance = fixture.data("plugin_affilify");
 
         assert.equal(instance.affiliateUrl, "http://partners.webmasterplan.com/click.asp?ref=756180&site=12802&type=text&tnb=1&diurl=http%3A%2F%2Fwww.fitmart.de%2FProtein%2FESN-Designer-Whey-1000g-Standbeutel.html");
+    });
+
+    QUnit.test("should make affilinet link with #-sign", function (assert) {
+        expect(1);
+
+        var fixture = $("<a href='http://www.fitmart.de/Protein/ESN-Designer-Whey-1000g-Standbeutel.html#test'>test</a>");
+
+        $testCanvas.append(fixture);
+
+        fixture.affilify({
+            zanox: {
+                publisherId: "36434335C584445997",
+                programs: [{domain: "vaola.de"}]
+            },
+            amazonPublisherId: "999",
+            affilinet: {
+                publisherId: "756180",
+                programs: [{domain: "fitmart.de", siteId: "12802"}, {domain: "vitafy.de", siteId: "123"}]
+            }
+        });
+        fixture.trigger("click");
+        var instance = fixture.data("plugin_affilify");
+
+        assert.equal(instance.affiliateUrl, "http://partners.webmasterplan.com/click.asp?ref=756180&site=12802&type=text&tnb=1&diurl=http%3A%2F%2Fwww.fitmart.de%2FProtein%2FESN-Designer-Whey-1000g-Standbeutel.html%23test");
     });
 
     //TODO test more config failures

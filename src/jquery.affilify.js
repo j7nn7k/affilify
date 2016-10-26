@@ -16,16 +16,16 @@
     // Create the defaults once
     var pluginName = "affilify",
         defaults = {
-			zanox: {
+            zanox: {
                 publisherId: "",
-                programs: [{ domain: ""}]
+                programs: [{domain: ""}]
             },
             amazonPublisherId: "",
-			affilinet: {
+            affilinet: {
                 publisherId: "",
-                programs: [{ siteId: "", domain: ""}]
+                programs: [{siteId: "", domain: ""}]
             }
-		};
+        };
 
     // The actual plugin constructor
     function Plugin(element, options) {
@@ -83,7 +83,7 @@
             return protocol + domain;
         },
         makeZanox: function () {
-            this.affiliateUrl = "https://ad.zanox.com/ppc/?" + this.settings.zanox.publisherId + "&ulp=[[" + this.originalUrl + "?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]";
+            this.affiliateUrl = "https://ad.zanox.com/ppc/?" + this.settings.zanox.publisherId + "&ulp=[[" + this.replacePoundSign(this.originalUrl) + "?utm_source=zanox&utm_campaign=deeplinkzx_de&affil=zanox]]";
         },
         isZanox: function () {
             //if not configured return
@@ -128,11 +128,10 @@
             });
         },
         makeAmazon: function () {
-
             if (this.originalUrl.indexOf("?tag=") > -1 || this.originalUrl.indexOf("&tag=") > -1) {
-                this.affiliateUrl = this.replaceQueryParam(this.originalUrl, "tag", this.settings.amazonPublisherId);
+                this.affiliateUrl = this.replaceQueryParam(this.replacePoundSign(this.originalUrl), "tag", this.settings.amazonPublisherId);
             } else {
-                this.affiliateUrl = this.originalUrl + "&tag=" + this.settings.amazonPublisherId;
+                this.affiliateUrl = this.appendParam(this.originalUrl, "tag", this.settings.amazonPublisherId);
             }
         },
         replaceQueryParam: function (url, paramName, paramValue) {
@@ -141,6 +140,20 @@
                 return url.replace(pattern, "$1" + paramValue + "$2");
             }
             return url + (url.indexOf("?") > 0 ? "&" : "?") + paramName + "=" + paramValue;
+        },
+        replacePoundSign: function (url) {
+            return url.replace(/#/g, "%23");
+        },
+        appendParam: function (url, paramName, paramValue) {
+            if (url.indexOf("#") !== -1) {
+                var urlSplitAtPoundSign = url.split("#");
+                var urlBeforePound = urlSplitAtPoundSign[0];
+                var urlAfterPound = urlSplitAtPoundSign[1];
+                var urlWithParamAppended = urlBeforePound + (urlBeforePound.indexOf("?") > 0 ? "&" : "?") + paramName + "=" + paramValue;
+                return urlWithParamAppended + "%23" + urlAfterPound;
+            } else {
+                return url + (url.indexOf("?") > 0 ? "&" : "?") + paramName + "=" + paramValue;
+            }
         },
         areSettingsValid: function () {
             if (this.settings.affilinet && this.settings.affilinet.programs) {

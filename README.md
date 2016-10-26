@@ -54,17 +54,18 @@ want to use.
 	
 ## Changelog
 
-### 2.0.0
+### 2.1.1
+* Fix bug caused by \#-signs in urls
 
-#### 2.1.0
+### 2.1.0
 * Fix mistake in demo and docs
 
-#### 2.0.0
+### 2.0.0
 * ( **Breaking change** ) Add support for multiple Zanox partners
 
 ### 1.0.0
 
-Initial release
+* Initial release
 
 ## Contributing
 
